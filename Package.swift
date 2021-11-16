@@ -9,6 +9,7 @@ import AppleProductTypes
 
 let package = Package(
     name: "JS Console",
+    defaultLocalization: "en",
     platforms: [
         .iOS("15.2")
     ],
