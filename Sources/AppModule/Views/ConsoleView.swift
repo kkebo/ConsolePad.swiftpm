@@ -53,3 +53,9 @@ extension ConsoleView: View {
         }
     }
 }
+
+struct ConsoleView_Previews: PreviewProvider {
+    static var previews: some View {
+        ConsoleView().previewPresets()
+    }
+}

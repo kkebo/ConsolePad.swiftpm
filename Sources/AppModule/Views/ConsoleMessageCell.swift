@@ -43,3 +43,15 @@ extension ConsoleMessageCell: View {
         }
     }
 }
+
+struct ConsoleMessageCell_Previews: PreviewProvider {
+    static var previews: some View {
+        List(MessageType.allCases, id: \.self) { type in
+            ConsoleMessageCell(
+                message: .init(text: "\(type)", type: type)
+            )
+        }
+        .listStyle(.plain)
+        .previewPresets()
+    }
+}

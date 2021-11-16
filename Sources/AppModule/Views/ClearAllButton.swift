@@ -20,3 +20,10 @@ extension ClearAllButton: View {
         }
     }
 }
+
+struct ClearAllButton_Previews: PreviewProvider {
+    static var previews: some View {
+        ClearAllButton {}
+            .previewPresets()
+    }
+}

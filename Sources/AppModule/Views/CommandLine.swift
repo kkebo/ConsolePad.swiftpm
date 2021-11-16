@@ -49,3 +49,12 @@ extension CommandLine: View {
         }
     }
 }
+
+struct CommandLine_Previews: PreviewProvider {
+    static var previews: some View {
+        ZStack {
+            CommandLine { _ in }
+        }
+        .previewPresets()
+    }
+}

@@ -10,6 +10,8 @@ enum MessageType {
     case error
 }
 
+extension MessageType: CaseIterable {}
+
 struct ConsoleMessage {
     let id = UUID()
     let text: String
