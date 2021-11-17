@@ -3,7 +3,7 @@ import SwiftUI
 struct CommandLine {
     @State var input = ""
     @State var isMultiline = false
-    @FocusState var isTextFieldFocused: Bool
+    @FocusState var isTextFieldFocused
 
     let onSend: (String) -> Void 
 }
