@@ -17,15 +17,15 @@ extension CommandLine: View {
                     "Input here...",
                     text: self.$input 
                 )
-                    .disableAutocorrection(true)
-                    .font(.body.monospaced())
-                    .focused(self.$isTextFieldFocused)
-                    .submitLabel(.send)
-                    .onSubmit {
-                        self.isTextFieldFocused = true
-                        self.onSend(self.input)
-                        self.input = ""
-                    }
+                .disableAutocorrection(true)
+                .font(.body.monospaced())
+                .focused(self.$isTextFieldFocused)
+                .submitLabel(.send)
+                .onSubmit {
+                    self.isTextFieldFocused = true
+                    self.onSend(self.input)
+                    self.input = ""
+                }
             } else {
                 TextEditor(text: self.$input)
                     .disableAutocorrection(true)
