@@ -1,11 +1,15 @@
+import Introspect
 import SwiftUI
 
 struct CommandLine {
     @State var input = ""
     @State var isMultiline = false
-    @FocusState var isTextFieldFocused
+    @State var coordinator: Self.Coordinator?
+    let onSend: (String) -> Void
 
-    let onSend: (String) -> Void 
+    init(onSend: @escaping (String) -> Void) {
+        self.onSend = onSend
+    }
 }
 
 extension CommandLine: View {
@@ -19,12 +23,9 @@ extension CommandLine: View {
                 )
                 .disableAutocorrection(true)
                 .font(.body.monospaced())
-                .focused(self.$isTextFieldFocused)
                 .submitLabel(.send)
-                .onSubmit {
-                    self.isTextFieldFocused = true
-                    self.onSend(self.input)
-                    self.input = ""
+                .introspectTextField { textField in
+                    textField.delegate = self.coordinator
                 }
             } else {
                 TextEditor(text: self.$input)
@@ -47,14 +48,38 @@ extension CommandLine: View {
             .toggleStyle(.button)
             .hoverEffect()
         }
+        .onAppear {
+            self.coordinator = Self.Coordinator(
+                input: self.$input,
+                onSend: self.onSend
+            )
+        }
+    }
+}
+
+extension CommandLine {
+    final class Coordinator: NSObject {
+        @Binding var input: String
+        let onSend: (String) -> Void
+
+        init(input: Binding<String>, onSend: @escaping (String) -> Void) {
+            self._input = input
+            self.onSend = onSend
+        }
+    }
+}
+
+extension CommandLine.Coordinator: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.onSend(self.input)
+        self.input = ""
+        return false
     }
 }
 
 struct CommandLine_Previews: PreviewProvider {
     static var previews: some View {
-        ZStack {
-            CommandLine { _ in }
-        }
-        .previewPresets()
+        CommandLine { _ in }
+            .previewPresets()
     }
 }
