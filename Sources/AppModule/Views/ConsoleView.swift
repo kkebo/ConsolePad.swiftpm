@@ -6,12 +6,12 @@ struct ConsoleView {
 
 extension ConsoleView: View {
     var body: some View {
-        VStack {
-            List(self.viewModel.filteredReversedMessages) {
-                ConsoleMessageCell(message: $0).flip()
-            }
-            .listStyle(.plain)
-            .flip()
+        List(self.viewModel.filteredReversedMessages) {
+            ConsoleMessageCell(message: $0).flip()
+        }
+        .listStyle(.plain)
+        .flip()
+        .safeAreaInset(edge: .bottom) {
             CommandLine(onSend: self.viewModel.run)
                 .padding()
                 .background(.regularMaterial)
