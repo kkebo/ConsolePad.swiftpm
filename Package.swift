@@ -8,7 +8,7 @@ import PackageDescription
 import AppleProductTypes
 
 let package = Package(
-    name: "JS Console",
+    name: "js-console",
     defaultLocalization: "en",
     platforms: [
         .iOS("15.2")
@@ -16,7 +16,7 @@ let package = Package(
     products: [
         .iOSApplication(
             name: "JS Console",
-            targets: ["AppModule"],
+            targets: ["JSConsole"],
             bundleIdentifier: "xyz.kebo.JSConsole",
             teamIdentifier: "X4678G5DL2",
             displayVersion: "1.0",
@@ -40,12 +40,9 @@ let package = Package(
     ],
     targets: [
         .executableTarget(
-            name: "AppModule",
+            name: "JSConsole",
             dependencies: [
                 .product(name: "Introspect", package: "SwiftUI-Introspect")
-            ],
-            resources: [
-                .process("Resources")
             ]
         )
     ]
