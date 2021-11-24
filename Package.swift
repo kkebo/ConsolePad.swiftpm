@@ -8,7 +8,7 @@ import PackageDescription
 import AppleProductTypes
 
 let package = Package(
-    name: "js-console",
+    name: "JS Console",
     defaultLocalization: "en",
     platforms: [
         .iOS("15.2")
