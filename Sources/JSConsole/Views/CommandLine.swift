@@ -19,7 +19,7 @@ extension CommandLine: View {
             if !self.isMultiline {
                 TextField(
                     "Input here...",
-                    text: self.$input 
+                    text: self.$input
                 )
                 .disableAutocorrection(true)
                 .font(.body.monospaced())
