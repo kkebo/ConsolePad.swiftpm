@@ -2,13 +2,26 @@ import Introspect
 import SwiftUI
 
 struct CommandLine {
-    @State var input = ""
     @State var isMultiline = false
     @State var coordinator: Self.Coordinator?
+    @ObservedObject var historyManager: HistoryManager
+    @StateObject var keyCommandBridge = KeyCommandBridge()
     let onSend: (String) -> Void
 
-    init(onSend: @escaping (String) -> Void) {
+    init(
+        historyManager: HistoryManager,
+        onSend: @escaping (String) -> Void
+    ) {
+        self.historyManager = historyManager
         self.onSend = onSend
+    }
+
+    func send() {
+        let input = self.historyManager.currentLine
+        guard !input.isEmpty else { return }
+
+        self.historyManager.commit()
+        self.onSend(input)
     }
 }
 
@@ -19,28 +32,39 @@ extension CommandLine: View {
             if !self.isMultiline {
                 TextField(
                     "Input here...",
-                    text: self.$input
+                    text: self.historyManager.binding
                 )
                 .disableAutocorrection(true)
                 .font(.body.monospaced())
                 .submitLabel(.send)
                 .introspectTextField { textField in
+                    object_setClass(textField, CommandLineTextField.self)
+                    guard let textField = textField as? CommandLineTextField
+                    else { return }
                     textField.delegate = self.coordinator
+                    textField.keyCommandBridge = self.keyCommandBridge
+                }
+                .onReceive(self.keyCommandBridge.publisher) { key in
+                    switch key {
+                    case .upArrow:
+                        self.historyManager.goBackword()
+                    case .downArrow:
+                        self.historyManager.goForward()
+                    default:
+                        break
+                    }
                 }
             } else {
-                TextEditor(text: self.$input)
+                TextEditor(text: self.historyManager.binding)
                     .disableAutocorrection(true)
                     .font(.body.monospaced())
                     .frame(maxHeight: 100)
             }
             if self.isMultiline {
-                Button("Send") {
-                    self.onSend(self.input)
-                    self.input = ""
-                }
-                .disabled(self.input.isEmpty)
-                .padding(10)
-                .hoverEffect()
+                Button("Send", action: self.send)
+                    .disabled(self.historyManager.currentLine.isEmpty)
+                    .padding(10)
+                    .hoverEffect()
             }
             Toggle(isOn: self.$isMultiline) {
                 Image(systemName: "line.3.horizontal")
@@ -49,21 +73,16 @@ extension CommandLine: View {
             .hoverEffect()
         }
         .onAppear {
-            self.coordinator = Self.Coordinator(
-                input: self.$input,
-                onSend: self.onSend
-            )
+            self.coordinator = Self.Coordinator(onSend: self.send)
         }
     }
 }
 
 extension CommandLine {
     final class Coordinator: NSObject {
-        @Binding var input: String
-        let onSend: (String) -> Void
+        let onSend: () -> Void
 
-        init(input: Binding<String>, onSend: @escaping (String) -> Void) {
-            self._input = input
+        init(onSend: @escaping () -> Void) {
             self.onSend = onSend
         }
     }
@@ -71,15 +90,14 @@ extension CommandLine {
 
 extension CommandLine.Coordinator: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.onSend(self.input)
-        self.input = ""
+        self.onSend()
         return false
     }
 }
 
 struct CommandLine_Previews: PreviewProvider {
     static var previews: some View {
-        CommandLine { _ in }
+        CommandLine(historyManager: HistoryManager()) { _ in }
             .previewPresets()
     }
 }

@@ -6,6 +6,7 @@ final class ConsoleViewModel {
     @Published var logLevel = LogLevel.all
 
     let context = JSContext()!
+    let historyManager = HistoryManager()
 
     var filteredReversedMessages: [ConsoleMessage] {
         self.messages
@@ -44,8 +45,6 @@ final class ConsoleViewModel {
     }
 
     func run(_ input: String) {
-        guard !input.isEmpty else { return }
-
         self.messages.append(.init(text: input, type: .input))
 
         let result = self.context.evaluateScript(input).toString()!
