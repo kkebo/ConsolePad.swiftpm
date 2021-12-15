@@ -8,19 +8,19 @@ import PackageDescription
 import AppleProductTypes
 
 let package = Package(
-    name: "JS Console",
+    name: "Console Pad",
     defaultLocalization: "en",
     platforms: [
         .iOS("15.2")
     ],
     products: [
         .iOSApplication(
-            name: "JS Console",
-            targets: ["JSConsole"],
-            bundleIdentifier: "xyz.kebo.JSConsole",
+            name: "Console Pad",
+            targets: ["ConsolePad"],
+            bundleIdentifier: "xyz.kebo.ConsolePad",
             teamIdentifier: "X4678G5DL2",
             displayVersion: "1.0",
-            bundleVersion: "1",
+            bundleVersion: "2",
             iconAssetName: "AppIcon",
             accentColorAssetName: "AccentColor",
             supportedDeviceFamilies: [
@@ -40,7 +40,7 @@ let package = Package(
     ],
     targets: [
         .executableTarget(
-            name: "JSConsole",
+            name: "ConsolePad",
             dependencies: [
                 .product(name: "Introspect", package: "SwiftUI-Introspect")
             ]

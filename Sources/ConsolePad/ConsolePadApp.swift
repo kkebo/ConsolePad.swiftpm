@@ -1,9 +1,9 @@
 import SwiftUI
 
 @main
-struct JSConsoleApp {}
+struct ConsolePadApp {}
 
-extension JSConsoleApp: App {
+extension ConsolePadApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
