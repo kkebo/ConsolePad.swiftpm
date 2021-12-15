@@ -12,9 +12,12 @@ extension ConsoleView: View {
         .listStyle(.plain)
         .flip()
         .safeAreaInset(edge: .bottom) {
-            CommandLine(onSend: self.viewModel.run)
-                .padding()
-                .background(.regularMaterial)
+            CommandLine(
+                historyManager: self.viewModel.historyManager,
+                onSend: self.viewModel.run
+            )
+            .padding()
+            .background(.regularMaterial)
         }
         .navigationTitle("Console")
         .navigationBarTitleDisplayMode(.inline)
