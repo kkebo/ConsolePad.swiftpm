@@ -43,6 +43,7 @@ extension CommandLine: View {
                     else { return }
                     textField.delegate = self.coordinator
                     textField.keyCommandBridge = self.keyCommandBridge
+                    textField.spellCheckingType = .no
                 }
                 .onReceive(self.keyCommandBridge.publisher) { key in
                     switch key {
@@ -59,6 +60,9 @@ extension CommandLine: View {
                     .disableAutocorrection(true)
                     .font(.body.monospaced())
                     .frame(maxHeight: 100)
+                    .introspectTextView { textView in
+                        textView.spellCheckingType = .no
+                    }
             }
             if self.isMultiline {
                 Button("Send", action: self.send)
