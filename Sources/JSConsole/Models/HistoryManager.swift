@@ -27,7 +27,7 @@ final class HistoryManager {
 
     func goBackword() {
         if self.index < self.history.endIndex,
-           self.history[self.index] != self.currentLine
+            self.history[self.index] != self.currentLine
         {
             self.history[self.index] = self.currentLine
         }
@@ -37,7 +37,7 @@ final class HistoryManager {
 
     func goForward() {
         if self.index < self.history.endIndex,
-           self.history[self.index] != self.currentLine
+            self.history[self.index] != self.currentLine
         {
             self.history[self.index] = self.currentLine
         }
