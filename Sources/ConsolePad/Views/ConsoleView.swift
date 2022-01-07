@@ -9,6 +9,7 @@ extension ConsoleView: View {
         List(self.viewModel.filteredReversedMessages) {
             ConsoleMessageCell(message: $0).flip()
         }
+        .textSelection(.enabled)
         .listStyle(.plain)
         .flip()
         .safeAreaInset(edge: .bottom) {
