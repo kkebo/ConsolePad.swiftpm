@@ -20,7 +20,7 @@ let package = Package(
             bundleIdentifier: "xyz.kebo.ConsolePad",
             teamIdentifier: "X4678G5DL2",
             displayVersion: "1.0",
-            bundleVersion: "5",
+            bundleVersion: "6",
             iconAssetName: "AppIcon",
             accentColorAssetName: "AccentColor",
             supportedDeviceFamilies: [
