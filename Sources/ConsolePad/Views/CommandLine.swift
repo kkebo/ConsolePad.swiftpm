@@ -35,6 +35,7 @@ extension CommandLine: View {
                     text: self.historyManager.binding
                 )
                 .disableAutocorrection(true)
+                .textInputAutocapitalization(.never)
                 .font(.body.monospaced())
                 .submitLabel(.send)
                 .introspectTextField { textField in
@@ -58,6 +59,7 @@ extension CommandLine: View {
             } else {
                 TextEditor(text: self.historyManager.binding)
                     .disableAutocorrection(true)
+                    .textInputAutocapitalization(.never)
                     .font(.body.monospaced())
                     .frame(maxHeight: 100)
                     .introspectTextView { textView in
