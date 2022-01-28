@@ -6,6 +6,7 @@ struct CommandLine {
     @State var coordinator: Self.Coordinator?
     @ObservedObject var historyManager: HistoryManager
     @StateObject var keyCommandBridge = KeyCommandBridge()
+    @FocusState var isFocused
     let onSend: (String) -> Void
 
     init(
@@ -38,6 +39,7 @@ extension CommandLine: View {
                 .textInputAutocapitalization(.never)
                 .font(.body.monospaced())
                 .submitLabel(.send)
+                .focused(self.$isFocused)
                 .introspectTextField { textField in
                     object_setClass(textField, CommandLineTextField.self)
                     guard let textField = textField as? CommandLineTextField
@@ -62,6 +64,7 @@ extension CommandLine: View {
                     .textInputAutocapitalization(.never)
                     .font(.body.monospaced())
                     .frame(maxHeight: 100)
+                    .focused(self.$isFocused)
                     .introspectTextView { textView in
                         textView.spellCheckingType = .no
                     }
@@ -78,8 +81,11 @@ extension CommandLine: View {
             .toggleStyle(.button)
             .hoverEffect()
         }
-        .onAppear {
-            self.coordinator = Self.Coordinator(onSend: self.send)
+        .task {
+            self.coordinator = Self.Coordinator {
+                self.send()
+            }
+            self.isFocused = true
         }
     }
 }
