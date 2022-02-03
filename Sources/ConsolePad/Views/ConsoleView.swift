@@ -48,11 +48,18 @@ extension ConsoleView: View {
                     }
                 } label: {
                     if self.viewModel.logLevel == .all {
-                        Image(systemName: "line.3.horizontal.decrease.circle")
+                        Label(
+                            self.viewModel.logLevel.description,
+                            systemImage: "line.3.horizontal.decrease.circle"
+                        )
                     } else {
-                        Image(systemName: "line.3.horizontal.decrease.circle.fill")
+                        Label(
+                            self.viewModel.logLevel.description,
+                            systemImage: "line.3.horizontal.decrease.circle.fill"
+                        )
                     }
                 }
+                .labelStyle(.titleAndIcon)
             }
         }
     }
