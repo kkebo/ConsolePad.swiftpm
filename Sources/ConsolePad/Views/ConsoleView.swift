@@ -24,13 +24,16 @@ extension ConsoleView: View {
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
-                ClearAllButton(action: self.viewModel.clear)
-                    .foregroundColor(
-                        self.viewModel.messages.isEmpty
-                            ? .secondary.opacity(0.5)
-                            : .red
-                    )
-                    .disabled(self.viewModel.messages.isEmpty)
+                Button(role: .destructive, action: self.viewModel.clear) {
+                    Image(systemName: "trash")
+                }
+                .foregroundColor(
+                    self.viewModel.messages.isEmpty
+                        ? .secondary.opacity(0.5)
+                        : .red
+                )
+                .disabled(self.viewModel.messages.isEmpty)
+                .keyboardShortcut("K", modifiers: [.command])
             }
             ToolbarItem(placement: .navigationBarTrailing) {
                 Menu {
