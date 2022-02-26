@@ -5,15 +5,11 @@
 // Do not edit it by hand because the contents will be replaced.
 
 import PackageDescription
-import AppleProductTypes
 
-let package = Package(
-    name: "Console Pad",
-    defaultLocalization: "en",
-    platforms: [
-        .iOS("15.2")
-    ],
-    products: [
+#if canImport(AppleProductTypes)
+    import AppleProductTypes
+
+    let products: [Product] = [
         .iOSApplication(
             name: "Console Pad",
             targets: ["ConsolePad"],
@@ -25,17 +21,28 @@ let package = Package(
             accentColorAssetName: "AccentColor",
             supportedDeviceFamilies: [
                 .pad,
-                .phone
+                .phone,
             ],
             supportedInterfaceOrientations: [
                 .portrait,
                 .landscapeRight,
                 .landscapeLeft,
-                .portraitUpsideDown(.when(deviceFamilies: [.pad]))
+                .portraitUpsideDown(.when(deviceFamilies: [.pad])),
             ],
             additionalInfoPlistContentFilePath: "Info.plist"
         )
+    ]
+#else
+    let products: [Product] = []
+#endif
+
+let package = Package(
+    name: "Console Pad",
+    defaultLocalization: "en",
+    platforms: [
+        .iOS("15.2")
     ],
+    products: products,
     dependencies: [
         .package(url: "https://github.com/siteline/SwiftUI-Introspect", "0.1.3"..<"0.2.0")
     ],
