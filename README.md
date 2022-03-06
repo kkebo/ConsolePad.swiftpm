@@ -22,5 +22,6 @@ Console Pad is an iPadOS/iOS app. You can run JavaScript code through JavaScript
 ## Get Started
 
 1. Clone this repository
+    - I recommend [Working Copy](https://workingcopyapp.com) or [a-Shell](https://holzschu.github.io/a-Shell_iOS/) (`lg2` command).
 2. Open ConsolePad.swiftpm with Swift Playgrounds
 3. Run
