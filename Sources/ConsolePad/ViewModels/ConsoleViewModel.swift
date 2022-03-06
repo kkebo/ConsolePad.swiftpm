@@ -4,9 +4,9 @@ import JavaScriptCore
 final class ConsoleViewModel {
     @Published var messages = [ConsoleMessage]()
     @Published var logLevel = LogLevel.all
-
-    let context = JSContext()!
     let historyManager = HistoryManager()
+
+    private let context = JSContext()!
 
     var filteredReversedMessages: [ConsoleMessage] {
         self.messages

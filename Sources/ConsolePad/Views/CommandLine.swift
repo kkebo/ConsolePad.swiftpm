@@ -2,11 +2,11 @@ import Introspect
 import SwiftUI
 
 struct CommandLine {
-    @State var isMultiline = false
-    @State var coordinator: Self.Coordinator?
-    @ObservedObject var historyManager: HistoryManager
-    @StateObject var keyCommandBridge = KeyCommandBridge()
-    let onSend: (String) -> Void
+    @State private var isMultiline = false
+    @State private var coordinator: Coordinator?
+    @ObservedObject private var historyManager: HistoryManager
+    @StateObject private var keyCommandBridge = KeyCommandBridge()
+    private let onSend: (String) -> Void
 
     init(
         historyManager: HistoryManager,
@@ -16,7 +16,7 @@ struct CommandLine {
         self.onSend = onSend
     }
 
-    func send() {
+    private func send() {
         let input = self.historyManager.currentLine
         guard !input.isEmpty else { return }
 
@@ -79,22 +79,20 @@ extension CommandLine: View {
             .hoverEffect()
         }
         .onAppear {
-            self.coordinator = Self.Coordinator(onSend: self.send)
+            self.coordinator = .init(onSend: self.send)
         }
     }
 }
 
-extension CommandLine {
-    final class Coordinator: NSObject {
-        let onSend: () -> Void
+fileprivate final class Coordinator: NSObject {
+    private let onSend: () -> Void
 
-        init(onSend: @escaping () -> Void) {
-            self.onSend = onSend
-        }
+    init(onSend: @escaping () -> Void) {
+        self.onSend = onSend
     }
 }
 
-extension CommandLine.Coordinator: UITextFieldDelegate {
+extension Coordinator: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.onSend()
         return false
