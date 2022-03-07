@@ -14,12 +14,20 @@ Console Pad is an iPadOS/iOS app. You can run JavaScript code through JavaScript
 - iPadOS 15.2 or later
 - iOS 15.2 or later
 
-## Build requirements
+## Get Started
+
+Console Pad is available on [TestFlight](https://testflight.apple.com/join/ZJulplz9).
+
+Or you can build from source.
+
+## Build from source
+
+### Requirements
 
 - Swift Playgrounds 4.0 or later (iPadOS 15.2 or later)
 - Xcode 13.2 or later (macOS 11.3 or later)
 
-## Get Started
+### Instructions
 
 1. Clone this repository
     - I recommend [Working Copy](https://workingcopyapp.com) or [a-Shell](https://holzschu.github.io/a-Shell_iOS/) (`lg2` command).
