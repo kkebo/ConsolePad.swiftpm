@@ -30,6 +30,6 @@ Or you can build from source.
 ### Instructions
 
 1. Clone this repository
-    - I recommend [Working Copy](https://workingcopyapp.com) or [a-Shell](https://holzschu.github.io/a-Shell_iOS/) (`lg2` command).
+    - To clone, I recommend using [Working Copy](https://workingcopyapp.com) or [a-Shell](https://holzschu.github.io/a-Shell_iOS/) (`lg2` command).
 2. Open ConsolePad.swiftpm with Swift Playgrounds
 3. Run
