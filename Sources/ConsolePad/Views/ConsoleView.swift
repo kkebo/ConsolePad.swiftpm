@@ -67,7 +67,7 @@ extension ConsoleView: View {
             }
             .labelStyle(.titleAndIcon)
         }
-    } 
+    }
 }
 
 struct ConsoleView_Previews: PreviewProvider {
