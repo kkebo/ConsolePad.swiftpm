@@ -16,7 +16,7 @@ import PackageDescription
             bundleIdentifier: "xyz.kebo.ConsolePad",
             teamIdentifier: "X4678G5DL2",
             displayVersion: "1.0",
-            bundleVersion: "11",
+            bundleVersion: "12",
             appIcon: .asset("AppIcon"),
             accentColor: .presetColor(.orange),
             supportedDeviceFamilies: [
