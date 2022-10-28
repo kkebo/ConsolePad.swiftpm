@@ -41,7 +41,7 @@ let package = Package(
     name: "Console Pad",
     defaultLocalization: "en",
     platforms: [
-        .iOS("16.0")
+        .iOS("16.1")
     ],
     products: products,
     dependencies: [
