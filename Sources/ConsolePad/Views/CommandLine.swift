@@ -34,9 +34,9 @@ extension CommandLine: View {
                     "Input here...",
                     text: self.historyManager.binding
                 )
-                .disableAutocorrection(true)
+                .autocorrectionDisabled()
                 .textInputAutocapitalization(.never)
-                .font(.body.monospaced())
+                .fontDesign(.monospaced)
                 .submitLabel(.send)
                 .introspectTextField { textField in
                     object_setClass(textField, CommandLineTextField.self)
@@ -44,7 +44,6 @@ extension CommandLine: View {
                     else { return }
                     textField.delegate = self.coordinator
                     textField.keyCommandBridge = self.keyCommandBridge
-                    textField.spellCheckingType = .no
                 }
                 .onReceive(self.keyCommandBridge.publisher) { key in
                     switch key {
@@ -58,13 +57,11 @@ extension CommandLine: View {
                 }
             } else {
                 TextEditor(text: self.historyManager.binding)
-                    .disableAutocorrection(true)
+                    .autocorrectionDisabled()
                     .textInputAutocapitalization(.never)
-                    .font(.body.monospaced())
+                    .fontDesign(.monospaced)
                     .frame(maxHeight: 100)
-                    .introspectTextView { textView in
-                        textView.spellCheckingType = .no
-                    }
+                    .scrollContentBackground(.hidden)
             }
             if self.isMultiline {
                 Button("Send") {
