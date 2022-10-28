@@ -1,7 +1,7 @@
 # Console Pad
 
-[![Swift](https://img.shields.io/badge/Swift-5.6-orange.svg)](https://www.swift.org)
-[![Swift Playgrounds](https://img.shields.io/badge/Swift%20Playgrounds-4.1-orange.svg)](https://itunes.apple.com/jp/app/swift-playgrounds/id908519492)
+[![Swift](https://img.shields.io/badge/Swift-5.7-orange.svg)](https://www.swift.org)
+[![Swift Playgrounds](https://img.shields.io/badge/Swift%20Playgrounds-4.2-orange.svg)](https://itunes.apple.com/jp/app/swift-playgrounds/id908519492)
 ![Platform](https://img.shields.io/badge/platform-ipados%20%7C%20ios-lightgrey.svg)
 [![License](https://img.shields.io/github/license/kkk669/ConsolePad.swiftpm.svg)](LICENSE.txt)
 
