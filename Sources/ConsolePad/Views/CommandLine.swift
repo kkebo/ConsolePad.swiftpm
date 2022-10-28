@@ -67,10 +67,12 @@ extension CommandLine: View {
                     }
             }
             if self.isMultiline {
-                Button("Send", action: self.send)
-                    .disabled(self.historyManager.currentLine.isEmpty)
-                    .padding(10)
-                    .hoverEffect()
+                Button("Send") {
+                    self.send()
+                }
+                .disabled(self.historyManager.currentLine.isEmpty)
+                .padding(10)
+                .hoverEffect()
             }
             Toggle(isOn: self.$isMultiline) {
                 Image(systemName: "line.3.horizontal")
@@ -79,7 +81,9 @@ extension CommandLine: View {
             .hoverEffect()
         }
         .onAppear {
-            self.coordinator = .init(onSend: self.send)
+            self.coordinator = .init {
+                self.send()
+            }
         }
     }
 }
