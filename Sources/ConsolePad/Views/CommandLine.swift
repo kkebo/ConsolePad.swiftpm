@@ -2,7 +2,6 @@ import Introspect
 import SwiftUI
 
 struct CommandLine {
-    @State private var isMultiline = false
     @State private var coordinator: Coordinator?
     @ObservedObject private var historyManager: HistoryManager
     @StateObject private var keyCommandBridge = KeyCommandBridge()
@@ -29,53 +28,33 @@ extension CommandLine: View {
     var body: some View {
         HStack {
             Image(systemName: "chevron.right")
-            if !self.isMultiline {
-                TextField(
-                    "Input here...",
-                    text: self.historyManager.binding
-                )
-                .autocorrectionDisabled()
-                .textInputAutocapitalization(.never)
-                .fontDesign(.monospaced)
-                .submitLabel(.send)
-                .introspectTextField { textField in
-                    object_setClass(textField, CommandLineTextField.self)
-                    guard let textField = textField as? CommandLineTextField
-                    else { return }
-                    textField.delegate = self.coordinator
-                    textField.keyCommandBridge = self.keyCommandBridge
-                }
-                .onReceive(self.keyCommandBridge.publisher) { key in
-                    switch key {
-                    case .upArrow:
-                        self.historyManager.goBackword()
-                    case .downArrow:
-                        self.historyManager.goForward()
-                    default:
-                        break
-                    }
-                }
-            } else {
-                TextEditor(text: self.historyManager.binding)
-                    .autocorrectionDisabled()
-                    .textInputAutocapitalization(.never)
-                    .fontDesign(.monospaced)
-                    .frame(maxHeight: 100)
-                    .scrollContentBackground(.hidden)
+            TextField(
+                "Input here...",
+                text: self.historyManager.binding,
+                axis: .vertical
+            )
+            .lineLimit(10)
+            .autocorrectionDisabled()
+            .textInputAutocapitalization(.never)
+            .fontDesign(.monospaced)
+            .submitLabel(.send)
+            .introspectTextField { textField in
+                object_setClass(textField, CommandLineTextField.self)
+                guard let textField = textField as? CommandLineTextField
+                else { return }
+                textField.delegate = self.coordinator
+                textField.keyCommandBridge = self.keyCommandBridge
             }
-            if self.isMultiline {
-                Button("Send") {
-                    self.send()
+            .onReceive(self.keyCommandBridge.publisher) { key in
+                switch key {
+                case .upArrow:
+                    self.historyManager.goBackword()
+                case .downArrow:
+                    self.historyManager.goForward()
+                default:
+                    break
                 }
-                .disabled(self.historyManager.currentLine.isEmpty)
-                .padding(10)
-                .hoverEffect()
             }
-            Toggle(isOn: self.$isMultiline) {
-                Image(systemName: "line.3.horizontal")
-            }
-            .toggleStyle(.button)
-            .hoverEffect()
         }
         .onAppear {
             self.coordinator = .init {
