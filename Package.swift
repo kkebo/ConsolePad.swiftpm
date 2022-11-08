@@ -6,10 +6,36 @@
 
 import PackageDescription
 
+let package = Package(
+    name: "Console Pad",
+    defaultLocalization: "en",
+    platforms: [
+        .iOS("16.1")
+    ],
+    products: [],
+    dependencies: [
+        .package(url: "https://github.com/siteline/SwiftUI-Introspect", "0.1.4"..<"0.2.0")
+    ],
+    targets: [
+        .executableTarget(
+            name: "ConsolePad",
+            dependencies: [
+                .product(name: "Introspect", package: "SwiftUI-Introspect")
+            ],
+            swiftSettings: [
+                .unsafeFlags(["-Xfrontend", "-warn-long-function-bodies=100"], .when(configuration: .debug)),
+                .unsafeFlags(["-Xfrontend", "-warn-long-expression-type-checking=100"], .when(configuration: .debug)),
+                .unsafeFlags(["-Xfrontend", "-strict-concurrency=complete"]),
+                .unsafeFlags(["-Xfrontend", "-enable-actor-data-race-checks"]),
+            ]
+        )
+    ]
+)
+
 #if canImport(AppleProductTypes)
     import AppleProductTypes
 
-    let products: [Product] = [
+    package.products += [
         .iOSApplication(
             name: "Console Pad",
             targets: ["ConsolePad"],
@@ -33,32 +59,4 @@ import PackageDescription
             additionalInfoPlistContentFilePath: "Info.plist"
         )
     ]
-#else
-    let products: [Product] = []
 #endif
-
-let package = Package(
-    name: "Console Pad",
-    defaultLocalization: "en",
-    platforms: [
-        .iOS("16.1")
-    ],
-    products: products,
-    dependencies: [
-        .package(url: "https://github.com/siteline/SwiftUI-Introspect", "0.1.4"..<"0.2.0")
-    ],
-    targets: [
-        .executableTarget(
-            name: "ConsolePad",
-            dependencies: [
-                .product(name: "Introspect", package: "SwiftUI-Introspect")
-            ],
-            swiftSettings: [
-                .unsafeFlags(["-Xfrontend", "-warn-long-function-bodies=100"], .when(configuration: .debug)),
-                .unsafeFlags(["-Xfrontend", "-warn-long-expression-type-checking=100"], .when(configuration: .debug)),
-                .unsafeFlags(["-Xfrontend", "-strict-concurrency=complete"]),
-                .unsafeFlags(["-Xfrontend", "-enable-actor-data-race-checks"]),
-            ]
-        )
-    ]
-)
