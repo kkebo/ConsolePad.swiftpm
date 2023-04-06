@@ -32,8 +32,8 @@ extension ConsoleView: View {
             }
             .foregroundColor(
                 self.viewModel.messages.isEmpty
-                ? .secondary.opacity(0.5)
-                : .red
+                    ? .secondary.opacity(0.5)
+                    : .red
             )
             .disabled(self.viewModel.messages.isEmpty)
             .keyboardShortcut("K", modifiers: [.command])

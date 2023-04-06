@@ -85,7 +85,7 @@ extension CommandLine: View {
     }
 }
 
-fileprivate final class Coordinator: NSObject {
+private final class Coordinator: NSObject {
     private let onSend: () -> Void
 
     init(onSend: @escaping () -> Void) {
