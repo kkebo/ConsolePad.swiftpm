@@ -14,13 +14,13 @@ let package = Package(
     ],
     products: [],
     dependencies: [
-        .package(url: "https://github.com/siteline/SwiftUI-Introspect", "0.3.1"..<"0.4.0")
+        .package(url: "https://github.com/siteline/SwiftUI-Introspect", "0.4.0"..<"0.5.0")
     ],
     targets: [
         .executableTarget(
             name: "ConsolePad",
             dependencies: [
-                .product(name: "Introspect", package: "SwiftUI-Introspect")
+                .product(name: "SwiftUIIntrospect", package: "SwiftUI-Introspect")
             ],
             swiftSettings: [
                 .unsafeFlags(["-Xfrontend", "-warn-long-function-bodies=100"], .when(configuration: .debug)),

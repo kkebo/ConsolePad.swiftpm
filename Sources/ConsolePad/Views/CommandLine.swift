@@ -1,4 +1,4 @@
-import Introspect
+import SwiftUIIntrospect
 import SwiftUI
 
 struct CommandLine {
@@ -38,7 +38,7 @@ extension CommandLine: View {
                 .textInputAutocapitalization(.never)
                 .fontDesign(.monospaced)
                 .submitLabel(.send)
-                .introspectTextField { textField in
+                .introspect(.textField, on: .iOS(.v16)) { textField in
                     object_setClass(textField, CommandLineTextField.self)
                     guard let textField = textField as? CommandLineTextField
                     else { return }
