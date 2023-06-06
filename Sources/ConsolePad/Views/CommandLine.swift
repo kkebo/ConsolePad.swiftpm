@@ -38,7 +38,7 @@ extension CommandLine: View {
                 .textInputAutocapitalization(.never)
                 .fontDesign(.monospaced)
                 .submitLabel(.send)
-                .introspect(.textField, on: .iOS(.v16)) { textField in
+                .introspect(.textField, on: .iOS(.v16, .v17)) { textField in
                     object_setClass(textField, CommandLineTextField.self)
                     guard let textField = textField as? CommandLineTextField
                     else { return }
