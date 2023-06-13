@@ -67,9 +67,9 @@ extension CommandLine: View {
                 Button("Send") {
                     self.send()
                 }
-                .disabled(self.historyManager.currentLine.isEmpty)
                 .padding(10)
                 .hoverEffect()
+                .disabled(self.historyManager.currentLine.isEmpty)
             }
             Toggle(isOn: self.$isMultiline) {
                 Image(systemName: "line.3.horizontal")
