@@ -30,11 +30,7 @@ extension ConsoleView: View {
             Button(role: .destructive, action: self.viewModel.clear) {
                 Image(systemName: "trash")
             }
-            .foregroundColor(
-                self.viewModel.messages.isEmpty
-                    ? .secondary.opacity(0.5)
-                    : .red
-            )
+            .tint(.red)
             .disabled(self.viewModel.messages.isEmpty)
             .keyboardShortcut("K", modifiers: [.command])
         }

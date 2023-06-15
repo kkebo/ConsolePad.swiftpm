@@ -10,11 +10,11 @@ extension ConsoleMessageCell: View {
         case .input:
             Label(self.message.text, systemImage: "chevron.right")
                 .fontDesign(.monospaced)
-                .foregroundColor(.primary)
+                .foregroundStyle(.primary)
         case .value:
             Label(self.message.text, systemImage: "arrow.left")
                 .fontDesign(.monospaced)
-                .foregroundColor(.gray)
+                .foregroundStyle(.gray)
         case .debug, .log:
             Text(self.message.text)
                 .fontDesign(.monospaced)
@@ -24,7 +24,7 @@ extension ConsoleMessageCell: View {
                     .fontDesign(.monospaced)
             } icon: {
                 Image(systemName: "i.circle.fill")
-                    .foregroundColor(.blue)
+                    .foregroundStyle(.blue)
             }
         case .warn:
             Label {
@@ -32,13 +32,13 @@ extension ConsoleMessageCell: View {
                     .fontDesign(.monospaced)
             } icon: {
                 Image(systemName: "exclamationmark.triangle.fill")
-                    .foregroundColor(.yellow)
+                    .foregroundStyle(.yellow)
             }
             .listRowBackground(Color.yellow.opacity(0.2))
         case .error:
             Label(self.message.text, systemImage: "xmark.circle.fill")
                 .fontDesign(.monospaced)
-                .foregroundColor(.red)
+                .foregroundStyle(.red)
                 .listRowBackground(Color.red.opacity(0.2))
         }
     }
