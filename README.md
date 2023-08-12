@@ -11,8 +11,8 @@ Console Pad is an iPadOS/iOS app. You can run JavaScript code through JavaScript
 
 ## Target platforms
 
-- iPadOS 16.1 or later
-- iOS 16.1 or later
+- iPadOS 17.0 or later
+- iOS 17.0 or later
 
 ## Get Started
 
