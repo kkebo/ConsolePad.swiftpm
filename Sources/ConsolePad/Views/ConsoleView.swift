@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct ConsoleView {
-    @StateObject private var viewModel = ConsoleViewModel()
+    @State private var viewModel = ConsoleViewModel()
 }
 
 extension ConsoleView: View {

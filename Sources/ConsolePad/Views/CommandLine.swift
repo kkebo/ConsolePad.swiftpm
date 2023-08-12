@@ -4,8 +4,8 @@ import SwiftUI
 struct CommandLine {
     @State private var isMultiline = false
     @State private var coordinator: Coordinator?
-    @ObservedObject private var historyManager: HistoryManager
-    @StateObject private var keyCommandBridge = KeyCommandBridge()
+    @State private var keyCommandBridge = KeyCommandBridge()
+    private let historyManager: HistoryManager
     private let onSend: (String) -> Void
 
     init(

@@ -1,7 +1,9 @@
 import Combine
-import SwiftUI
+import Observation
 
-final class KeyCommandBridge {
+import struct SwiftUI.KeyEquivalent
+
+@Observable final class KeyCommandBridge {
     private let _publisher = PassthroughSubject<KeyEquivalent, Never>()
 
     var publisher: AnyPublisher<KeyEquivalent, Never> {
@@ -12,5 +14,3 @@ final class KeyCommandBridge {
         self._publisher.send(key)
     }
 }
-
-extension KeyCommandBridge: ObservableObject {}
