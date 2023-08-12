@@ -1,10 +1,7 @@
 import SwiftUI
-@_spi(Advanced) import SwiftUIIntrospect
 
 struct CommandLine {
     @State private var isMultiline = false
-    @State private var coordinator: Coordinator?
-    @State private var keyCommandBridge = KeyCommandBridge()
     private let historyManager: HistoryManager
     private let onSend: (String) -> Void
 
@@ -38,22 +35,36 @@ extension CommandLine: View {
                 .textInputAutocapitalization(.never)
                 .fontDesign(.monospaced)
                 .submitLabel(.send)
-                .introspect(.textField, on: .iOS(.v17...)) { textField in
-                    object_setClass(textField, CommandLineTextField.self)
-                    guard let textField = textField as? CommandLineTextField
-                    else { return }
-                    textField.delegate = self.coordinator
-                    textField.keyCommandBridge = self.keyCommandBridge
+                .onKeyPress(.return) {
+                    self.send()
+                    return .handled
                 }
-                .onReceive(self.keyCommandBridge.publisher) { key in
-                    switch key {
-                    case .upArrow:
+                .onKeyPress(.upArrow) {
+                    self.historyManager.goBackword()
+                    return .handled
+                }
+                .onKeyPress(keys: ["p"]) { press in
+                    if press.modifiers.contains(.control) {
                         self.historyManager.goBackword()
-                    case .downArrow:
-                        self.historyManager.goForward()
-                    default:
-                        break
+                        return .handled
+                    } else {
+                        return .ignored
                     }
+                }
+                .onKeyPress(.downArrow) {
+                    self.historyManager.goForward()
+                    return .handled
+                }
+                .onKeyPress(keys: ["n"]) { press in
+                    if press.modifiers.contains(.control) {
+                        self.historyManager.goForward()
+                        return .handled
+                    } else {
+                        return .ignored
+                    }
+                }
+                .onSubmit {
+                    self.send()
                 }
             } else {
                 TextEditor(text: self.historyManager.binding)
@@ -77,26 +88,6 @@ extension CommandLine: View {
             .toggleStyle(.button)
             .hoverEffect()
         }
-        .onAppear {
-            self.coordinator = .init {
-                self.send()
-            }
-        }
-    }
-}
-
-private final class Coordinator: NSObject {
-    private let onSend: () -> Void
-
-    init(onSend: @escaping () -> Void) {
-        self.onSend = onSend
-    }
-}
-
-extension Coordinator: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.onSend()
-        return false
     }
 }
 
