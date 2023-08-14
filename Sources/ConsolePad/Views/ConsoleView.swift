@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct ConsoleView {
-    @StateObject private var viewModel = ConsoleViewModel()
+    @State private var viewModel = ConsoleViewModel()
 }
 
 extension ConsoleView: View {
@@ -26,7 +26,7 @@ extension ConsoleView: View {
     }
 
     @ToolbarContentBuilder private var toolbar: some ToolbarContent {
-        ToolbarItem(placement: .navigationBarLeading) {
+        ToolbarItem(placement: .topBarLeading) {
             Button(role: .destructive, action: self.viewModel.clear) {
                 Image(systemName: "trash")
             }
@@ -34,7 +34,7 @@ extension ConsoleView: View {
             .disabled(self.viewModel.messages.isEmpty)
             .keyboardShortcut("K", modifiers: [.command])
         }
-        ToolbarItem(placement: .navigationBarTrailing) {
+        ToolbarItem(placement: .topBarTrailing) {
             Menu {
                 Picker(
                     "Log Level",

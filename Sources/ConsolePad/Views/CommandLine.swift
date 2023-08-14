@@ -4,8 +4,8 @@ import SwiftUI
 struct CommandLine {
     @State private var isMultiline = false
     @State private var coordinator: Coordinator?
-    @ObservedObject private var historyManager: HistoryManager
-    @StateObject private var keyCommandBridge = KeyCommandBridge()
+    @State private var keyCommandBridge = KeyCommandBridge()
+    private let historyManager: HistoryManager
     private let onSend: (String) -> Void
 
     init(
@@ -38,7 +38,7 @@ extension CommandLine: View {
                 .textInputAutocapitalization(.never)
                 .fontDesign(.monospaced)
                 .submitLabel(.send)
-                .introspect(.textField, on: .iOS(.v16...)) { textField in
+                .introspect(.textField, on: .iOS(.v17...)) { textField in
                     object_setClass(textField, CommandLineTextField.self)
                     guard let textField = textField as? CommandLineTextField
                     else { return }

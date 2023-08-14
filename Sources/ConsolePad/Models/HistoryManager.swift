@@ -1,8 +1,10 @@
-import SwiftUI
+import Observation
 
-final class HistoryManager {
-    @Published private var index = 0
-    @Published private var buffer = [""]
+import struct SwiftUI.Binding
+
+@Observable final class HistoryManager {
+    private var index = 0
+    private var buffer = [""]
     private var history = [String]()
 
     var binding: Binding<String> {
@@ -45,5 +47,3 @@ final class HistoryManager {
         self.index = min(self.buffer.endIndex - 1, self.index + 1)
     }
 }
-
-extension HistoryManager: ObservableObject {}

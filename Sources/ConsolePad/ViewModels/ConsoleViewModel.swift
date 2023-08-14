@@ -1,9 +1,9 @@
-import Combine
 import JavaScriptCore
+import Observation
 
-final class ConsoleViewModel {
-    @Published var messages = [ConsoleMessage]()
-    @Published var logLevel = LogLevel.all
+@Observable final class ConsoleViewModel {
+    var messages = [ConsoleMessage]()
+    var logLevel = LogLevel.all
     let historyManager = HistoryManager()
 
     private let context = JSContext()!
@@ -55,5 +55,3 @@ final class ConsoleViewModel {
         self.messages.removeAll()
     }
 }
-
-extension ConsoleViewModel: ObservableObject {}
