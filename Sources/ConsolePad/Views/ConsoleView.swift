@@ -41,7 +41,9 @@ extension ConsoleView: View {
                     selection: self.$viewModel.logLevel
                 ) {
                     ForEach(LogLevel.allCases) {
-                        if let name = $0.systemImageName {
+                        if case .all = $0 {
+                            Text(LocalizedStringKey($0.description))
+                        } else if let name = $0.systemImageName {
                             Label($0.description, systemImage: name)
                         } else {
                             Text($0.description)
