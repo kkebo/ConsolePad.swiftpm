@@ -29,7 +29,6 @@ let package = Package(
                 .unsafeFlags(["-Xfrontend", "-enable-actor-data-race-checks"]),
                 .enableUpcomingFeature("BareSlashRegexLiterals"),
                 .enableUpcomingFeature("ExistentialAny"),
-                .enableUpcomingFeature("ImplicitOpenExistentials"),
             ]
         )
     ]
