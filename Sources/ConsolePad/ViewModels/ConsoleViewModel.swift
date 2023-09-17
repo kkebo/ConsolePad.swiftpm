@@ -2,7 +2,7 @@ import JavaScriptCore
 import Observation
 
 @Observable final class ConsoleViewModel {
-    var messages = [ConsoleMessage]()
+    var messages: [ConsoleMessage] = []
     var logLevel = LogLevel.all
     let historyManager = HistoryManager()
 
@@ -29,15 +29,16 @@ import Observation
         let console = self.context
             .objectForKeyedSubscript("console")!
 
-        [
+        for (k, v) in [
             "log": MessageType.log,
             "debug": .debug,
             "error": .error,
             "info": .info,
             "table": .log,
             "warn": .warn,
-        ]
-        .forEach { k, v in console.setObject(log(v), forKeyedSubscript: k) }
+        ] {
+            console.setObject(log(v), forKeyedSubscript: k)
+        }
         console.setObject(
             self.clear as @convention(block) () -> Void,
             forKeyedSubscript: "clear"

@@ -3,6 +3,7 @@ import UIKit
 final class CommandLineTextField: UITextField {
     weak var keyCommandBridge: KeyCommandBridge?
 
+    /// key commands.
     override var keyCommands: [UIKeyCommand]? {
         let commands = [
             UIKeyCommand(
