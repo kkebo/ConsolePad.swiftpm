@@ -7,7 +7,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "Console Pad",
+    name: "ConsolePad.swiftpm",
     defaultLocalization: "en",
     platforms: [
         .iOS("17.0")
