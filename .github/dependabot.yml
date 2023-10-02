@@ -9,3 +9,7 @@ updates:
     directory: "/" # Location of package manifests
     schedule:
       interval: "weekly"
+    assignees:
+      - "kkk669"
+    commit-message:
+      prefix: "build"
