@@ -14,7 +14,7 @@ let package = Package(
     ],
     products: [],
     dependencies: [
-        .package(url: "https://github.com/siteline/SwiftUI-Introspect", "1.1.0"..<"1.2.0")
+        .package(url: "https://github.com/siteline/SwiftUI-Introspect", from: "1.1.0")
     ],
     targets: [
         .executableTarget(
@@ -29,7 +29,6 @@ let package = Package(
                 .unsafeFlags(["-Xfrontend", "-enable-actor-data-race-checks"]),
                 .enableUpcomingFeature("BareSlashRegexLiterals"),
                 .enableUpcomingFeature("ExistentialAny"),
-                .enableUpcomingFeature("ImplicitOpenExistentials"),
             ]
         )
     ]

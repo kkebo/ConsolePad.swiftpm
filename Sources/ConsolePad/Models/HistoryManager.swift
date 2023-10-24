@@ -5,7 +5,7 @@ import struct SwiftUI.Binding
 @Observable final class HistoryManager {
     private var index = 0
     private var buffer = [""]
-    private var history = [String]()
+    private var history: [String] = []
 
     var binding: Binding<String> {
         .init(
