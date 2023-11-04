@@ -14,7 +14,7 @@ let package = Package(
     ],
     products: [],
     dependencies: [
-        .package(url: "https://github.com/siteline/SwiftUI-Introspect", from: "1.1.0")
+        .package(url: "https://github.com/siteline/SwiftUI-Introspect", from: "1.1.1")
     ],
     targets: [
         .executableTarget(
