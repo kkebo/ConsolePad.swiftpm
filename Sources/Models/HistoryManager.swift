@@ -2,7 +2,9 @@ import Observation
 
 import struct SwiftUI.Binding
 
-@Observable final class HistoryManager {
+@MainActor
+@Observable
+final class HistoryManager {
     private var index = 0
     private var buffer = [""]
     private var history: [String] = []
