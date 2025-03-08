@@ -1,7 +1,9 @@
 import JavaScriptCore
 import Observation
 
-@Observable final class ConsoleViewModel {
+@MainActor
+@Observable
+final class ConsoleViewModel {
     var messages: [ConsoleMessage] = []
     var logLevel = LogLevel.all
     let historyManager = HistoryManager()

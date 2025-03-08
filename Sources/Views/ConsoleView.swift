@@ -1,5 +1,6 @@
 import SwiftUI
 
+@MainActor
 struct ConsoleView {
     @State private var viewModel = ConsoleViewModel()
 }

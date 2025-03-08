@@ -13,6 +13,7 @@ struct CommandLine {
         self.onSend = onSend
     }
 
+    @MainActor
     private func send() {
         let input = self.historyManager.currentLine
         guard !input.isEmpty else { return }

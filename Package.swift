@@ -21,28 +21,11 @@ let package = Package(
                 .unsafeFlags(["-Xfrontend", "-warn-long-function-bodies=100"], .when(configuration: .debug)),
                 .unsafeFlags(["-Xfrontend", "-warn-long-expression-type-checking=100"], .when(configuration: .debug)),
                 .unsafeFlags(["-Xfrontend", "-enable-actor-data-race-checks"]),
-                // Swift 6
-                .enableUpcomingFeature("ConciseMagicFile"),
-                .enableUpcomingFeature("ForwardTrailingClosures"),
-                .enableUpcomingFeature("StrictConcurrency"),
-                .enableUpcomingFeature("BareSlashRegexLiterals"),
-                .enableUpcomingFeature("DeprecateApplicationMain"),
-                .enableUpcomingFeature("ImportObjcForwardDeclarations"),
-                .enableUpcomingFeature("DisableOutwardActorInference"),
-                .enableUpcomingFeature("IsolatedDefaultValues"),
-                .enableUpcomingFeature("GlobalConcurrency"),
-                .enableUpcomingFeature("InferSendableFromCaptures"),
-                .enableUpcomingFeature("ImplicitOpenExistentials"),
-                .enableUpcomingFeature("RegionBasedIsolation"),
-                .enableUpcomingFeature("DynamicActorIsolation"),
-                .enableUpcomingFeature("NonfrozenEnumExhaustivity"),
-                .enableUpcomingFeature("GlobalActorIsolatedTypesUsability"),
                 // Swift 7
                 .enableUpcomingFeature("ExistentialAny"),
             ]
         )
-    ],
-    swiftLanguageModes: [.v5]
+    ]
 )
 
 #if canImport(AppleProductTypes)
