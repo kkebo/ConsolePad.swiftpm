@@ -8,6 +8,7 @@ final class ConsoleViewModel {
     var logLevel = LogLevel.all
     let historyManager = HistoryManager()
 
+    // swift-format-ignore: NeverForceUnwrap
     private let context = JSContext()!
 
     var filteredReversedMessages: [ConsoleMessage] {
@@ -19,6 +20,7 @@ final class ConsoleViewModel {
 
     init() {
         self.context.exceptionHandler = { _, exception in
+            // swift-format-ignore: NeverForceUnwrap
             let string = exception!.toString()!
             self.messages.append(.init(text: string, type: .error))
         }
@@ -28,6 +30,7 @@ final class ConsoleViewModel {
                 self.messages.append(.init(text: $0, type: type))
             } as @convention(block) (String) -> Void
         }
+        // swift-format-ignore: NeverForceUnwrap
         let console = self.context
             .objectForKeyedSubscript("console")!
 
@@ -50,6 +53,7 @@ final class ConsoleViewModel {
     func run(_ input: String) {
         self.messages.append(.init(text: input, type: .input))
 
+        // swift-format-ignore: NeverForceUnwrap
         let result = self.context.evaluateScript(input).toString()!
         self.messages.append(.init(text: result, type: .value))
     }
