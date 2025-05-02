@@ -2,8 +2,14 @@ import SwiftUI
 
 struct CommandLine {
     @State private var isMultiline = false
+    @FocusState private var focusedField: Self.Field?
     private let historyManager: HistoryManager
     private let onSend: (String) -> Void
+
+    enum Field {
+        case single
+        case multi
+    }
 
     init(
         historyManager: HistoryManager,
@@ -67,6 +73,12 @@ extension CommandLine: View {
                 .onSubmit {
                     self.send()
                 }
+                .focused(self.$focusedField, equals: .single)
+                .onAppear {
+                    if ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] != "1" {
+                        self.focusedField = .single
+                    }
+                }
             } else {
                 TextEditor(text: self.historyManager.binding)
                     .autocorrectionDisabled()
@@ -74,6 +86,12 @@ extension CommandLine: View {
                     .fontDesign(.monospaced)
                     .frame(maxHeight: 100)
                     .scrollContentBackground(.hidden)
+                    .focused(self.$focusedField, equals: .multi)
+                    .onAppear {
+                        if ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] != "1" {
+                            self.focusedField = .multi
+                        }
+                    }
             }
             if self.isMultiline {
                 Button("Send") {
