@@ -10,7 +10,7 @@ let package = Package(
     name: "ConsolePad.swiftpm",
     defaultLocalization: "en",
     platforms: [
-        .iOS("18.1")
+        .iOS(.v26)
     ],
     products: [],
     dependencies: [],
