@@ -1,7 +1,7 @@
 # Console Pad
 
-[![Swift](https://img.shields.io/badge/Swift-6.0-orange.svg)](https://www.swift.org)
-[![Swift Playground](https://img.shields.io/badge/Swift%20Playground-4.6-orange.svg)](https://itunes.apple.com/jp/app/swift-playground/id908519492)
+[![Swift](https://img.shields.io/badge/Swift-6.2-orange.svg)](https://www.swift.org)
+[![Swift Playground](https://img.shields.io/badge/Swift%20Playground-4.7-orange.svg)](https://itunes.apple.com/jp/app/swift-playground/id908519492)
 ![Platform](https://img.shields.io/badge/platform-ipados%20%7C%20ios-lightgrey.svg)
 [![License](https://img.shields.io/github/license/kkebo/ConsolePad.swiftpm.svg)](LICENSE.txt)
 
@@ -11,8 +11,8 @@ Console Pad is an iPadOS/iOS app. You can run JavaScript code through JavaScript
 
 ## Target platforms
 
-- iPadOS 18.1 or later
-- iOS 18.1 or later
+- iPadOS 26.0 or later
+- iOS 26.0 or later
 
 ## Get Started
 
@@ -24,9 +24,9 @@ Or you can build from source.
 
 ### Requirements
 
-- Swift Playground 4.6 or later (iPadOS 18.1 or later)
-- Swift Playground 4.6 or later (macOS 14.0 or later)
-- Xcode 16.1 or later (macOS 14.5 or later)
+- Swift Playground 4.7 or later (iPadOS 26.0 or later)
+- Swift Playground 4.7 or later (macOS 15.0 or later)
+- Xcode 26.0 or later (macOS 15.6 or later)
 
 ### Instructions
 
