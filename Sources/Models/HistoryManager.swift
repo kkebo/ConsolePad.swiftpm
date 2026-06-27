@@ -1,4 +1,4 @@
-import Observation
+private import Observation
 
 import struct SwiftUI.Binding
 
