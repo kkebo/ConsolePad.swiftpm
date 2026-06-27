@@ -21,8 +21,9 @@ let package = Package(
                 .process("Assets.xcassets")
             ],
             swiftSettings: [
-                .unsafeFlags(["-Xfrontend", "-warn-long-function-bodies=100"], .when(configuration: .debug)),
-                .unsafeFlags(["-Xfrontend", "-warn-long-expression-type-checking=100"], .when(configuration: .debug)),
+                // FIXME: Cannot treat these warnings as warnings
+                // .unsafeFlags(["-Xfrontend", "-warn-long-function-bodies=100"], .when(configuration: .debug)),
+                // .unsafeFlags(["-Xfrontend", "-warn-long-expression-type-checking=100"], .when(configuration: .debug)),
                 .strictMemorySafety(),
                 .treatAllWarnings(as: .error),
                 // Swift 7
