@@ -1,4 +1,4 @@
-import Foundation
+import struct Foundation.UUID
 
 enum MessageType {
     case input

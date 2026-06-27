@@ -1,4 +1,4 @@
-import JavaScriptCore
+private import JavaScriptCore
 import Observation
 
 @MainActor
