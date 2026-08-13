@@ -36,7 +36,7 @@ extension ConsoleMessageCell: View {
             }
             .listRowBackground(Color.yellow.opacity(0.2))
         case .error:
-            Label(self.message.text, systemImage: "xmark.circle.fill")
+            Label(self.message.text, systemImage: "xmark.octagon.fill")
                 .fontDesign(.monospaced)
                 .foregroundStyle(.red)
                 .listRowBackground(Color.red.opacity(0.2))

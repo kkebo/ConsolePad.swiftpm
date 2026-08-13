@@ -2,6 +2,7 @@ import SwiftUI
 
 @MainActor
 struct ConsoleView {
+    @Environment(\.horizontalSizeClass) private var hSizeClass
     @State private var viewModel = ConsoleViewModel()
 }
 
@@ -36,36 +37,58 @@ extension ConsoleView: View {
             .keyboardShortcut("K", modifiers: [.command])
         }
         ToolbarItem(placement: .topBarTrailing) {
-            Menu {
-                Picker(
-                    "Log Level",
-                    selection: self.$viewModel.logLevel
-                ) {
-                    ForEach(LogLevel.allCases) {
-                        if case .all = $0 {
-                            Text(LocalizedStringKey($0.description))
-                        } else if let name = $0.systemImageName {
-                            Label($0.description, systemImage: name)
-                        } else {
-                            Text($0.description)
-                        }
-                    }
+            Toggle("Log Level", systemImage: "line.3.horizontal.decrease", isOn: self.$viewModel.isFiltered)
+        }
+        if self.viewModel.isFiltered {
+            ToolbarItem(placement: .subtitle) {
+                // FIXME: The button width may become too long.
+                Button("Filtered By: \(self.viewModel.filter.map(\.description), format: .list(type: .and))") {
+                    self.viewModel.isFilterVisible = true
                 }
-            } label: {
-                if self.viewModel.logLevel == .all {
-                    Label(
-                        self.viewModel.logLevel.description,
-                        systemImage: "line.3.horizontal.decrease.circle"
-                    )
-                } else {
-                    Label(
-                        self.viewModel.logLevel.description,
-                        systemImage: "line.3.horizontal.decrease.circle.fill"
-                    )
+                .tint(.accentColor)
+                // FIXME: Remove the hover effect.
+                .popover(isPresented: self.$viewModel.isFilterVisible) {
+                    self.filterView
                 }
             }
-            .labelStyle(.titleAndIcon)
         }
+    }
+
+    private var filterView: some View {
+        NavigationStack {
+            List {
+                Section("Log Levels") {
+                    ForEach(LogLevel.allCases) { level in
+                        Button {
+                            self.viewModel.toggleFilter(level)
+                        } label: {
+                            HStack {
+                                Label(level.description, systemImage: level.systemImageName)
+                                if self.viewModel.filter.contains(level) {
+                                    Spacer()
+                                    Image(systemName: "checkmark")
+                                        .tint(.accentColor)
+                                }
+                            }
+                        }
+                        .tint(.primary)
+                    }
+                }
+            }
+            .navigationTitle("Filters")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .confirmationAction) {
+                    Button("Done", systemImage: "checkmark", role: .confirm) {
+                        self.viewModel.isFilterVisible = false
+                    }
+                }
+            }
+        }
+        .frame(
+            width: self.hSizeClass == .regular ? 420 : nil,
+            height: self.hSizeClass == .regular ? 600 : nil
+        )
     }
 }
 
