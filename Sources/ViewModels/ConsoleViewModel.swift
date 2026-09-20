@@ -39,7 +39,6 @@ final class ConsoleViewModel {
             "debug": .log,
             "error": .error,
             "info": .info,
-            "table": .log,
             "warn": .warn,
         ] {
             console.setObject(log(v), forKeyedSubscript: k)
