@@ -1,6 +1,5 @@
 enum LogLevel {
     case all
-    case debug
     case log
     case info
     case warn
@@ -9,7 +8,6 @@ enum LogLevel {
     var systemImageName: String? {
         switch self {
         case .all: nil
-        case .debug: nil
         case .log: nil
         case .info: "i.circle"
         case .warn: "exclamationmark.triangle"
@@ -21,7 +19,6 @@ enum LogLevel {
         guard type != .input && type != .value else { return true }
         return switch self {
         case .all: true
-        case .debug: [MessageType.debug, .log, .info, .warn, .error].contains(type)
         case .log: [MessageType.log, .info, .warn, .error].contains(type)
         case .info: [MessageType.info, .warn, .error].contains(type)
         case .warn: [MessageType.warn, .error].contains(type)
@@ -40,7 +37,6 @@ extension LogLevel: CustomStringConvertible {
     var description: String {
         switch self {
         case .all: "All"
-        case .debug: "Debug"
         case .log: "Log"
         case .info: "Info"
         case .warn: "Warning"
