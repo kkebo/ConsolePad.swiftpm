@@ -36,7 +36,7 @@ final class ConsoleViewModel {
 
         for (k, v) in [
             "log": MessageType.log,
-            "debug": .debug,
+            "debug": .log,
             "error": .error,
             "info": .info,
             "table": .log,

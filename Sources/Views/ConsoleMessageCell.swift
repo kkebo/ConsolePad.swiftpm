@@ -15,7 +15,7 @@ extension ConsoleMessageCell: View {
             Label(self.message.text, systemImage: "arrow.left")
                 .fontDesign(.monospaced)
                 .foregroundStyle(.gray)
-        case .debug, .log:
+        case .log:
             Text(self.message.text)
                 .fontDesign(.monospaced)
         case .info:
