@@ -2,6 +2,7 @@ import SwiftUI
 
 @MainActor
 struct ConsoleView {
+    @Environment(\.horizontalSizeClass) private var hSizeClass
     @State private var viewModel = ConsoleViewModel()
 }
 
@@ -35,36 +36,51 @@ extension ConsoleView: View {
             .disabled(self.viewModel.messages.isEmpty)
             .keyboardShortcut("K", modifiers: [.command])
         }
-        ToolbarItem(placement: .topBarTrailing) {
-            Menu {
-                Picker(
-                    "Log Level",
-                    selection: self.$viewModel.logLevel
-                ) {
-                    ForEach(LogLevel.allCases) {
-                        if case .all = $0 {
-                            Text(LocalizedStringKey($0.description))
-                        } else if let name = $0.systemImageName {
-                            Label($0.description, systemImage: name)
-                        } else {
-                            Text($0.description)
+        ToolbarItem(placement: .subtitle) {
+            Button(LocalizedStringKey(self.viewModel.filterLabel)) {
+                self.viewModel.isFilterVisible = true
+            }
+            .tint(.accentColor)
+            .popover(isPresented: self.$viewModel.isFilterVisible) {
+                self.filterView
+                    .frame(
+                        minWidth: self.hSizeClass == .regular ? 360 : nil,
+                        minHeight: self.hSizeClass == .regular ? 400 : nil
+                    )
+            }
+        }
+    }
+
+    private var filterView: some View {
+        NavigationStack {
+            List {
+                Section("Log Levels") {
+                    ForEach(LogLevel.allCases) { level in
+                        Button {
+                            self.viewModel.toggleFilter(level)
+                        } label: {
+                            HStack {
+                                Label(LocalizedStringKey(level.description), systemImage: level.systemImageName)
+                                if self.viewModel.filter.contains(level) {
+                                    Spacer()
+                                    Image(systemName: "checkmark")
+                                        .tint(.accentColor)
+                                }
+                            }
                         }
+                        .tint(.primary)
                     }
                 }
-            } label: {
-                if self.viewModel.logLevel == .all {
-                    Label(
-                        self.viewModel.logLevel.description,
-                        systemImage: "line.3.horizontal.decrease.circle"
-                    )
-                } else {
-                    Label(
-                        self.viewModel.logLevel.description,
-                        systemImage: "line.3.horizontal.decrease.circle.fill"
-                    )
+            }
+            .navigationTitle("Filters")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .confirmationAction) {
+                    Button("Done", systemImage: "checkmark", role: .confirm) {
+                        self.viewModel.isFilterVisible = false
+                    }
                 }
             }
-            .labelStyle(.titleAndIcon)
         }
     }
 }

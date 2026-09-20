@@ -5,17 +5,30 @@ import Observation
 @Observable
 final class ConsoleViewModel {
     var messages: [ConsoleMessage] = []
-    var logLevel = LogLevel.all
+    var isFilterVisible = false
+    var filter = Set(LogLevel.allCases)
     let historyManager = HistoryManager()
 
     // swift-format-ignore: NeverForceUnwrap
     private let context = JSContext()!
 
     var filteredReversedMessages: [ConsoleMessage] {
-        self.messages
+        let whitelist = self.filter.map(\.messageType) + [.input, .value]
+        return self.messages
             .lazy
-            .filter { self.logLevel.canShow(type: $0.type) }
+            .filter { whitelist.contains($0.type) }
             .reversed()
+    }
+
+    var filterLabel: String {
+        switch self.filter {
+        case [.log]: "Logs Only"
+        case [.info]: "Info Only"
+        case [.warn]: "Warnings Only"
+        case [.error]: "Errors Only"
+        case Set(LogLevel.allCases): "All Levels"
+        case _: "Custom Levels"
+        }
     }
 
     init() {
@@ -59,5 +72,13 @@ final class ConsoleViewModel {
 
     func clear() {
         self.messages.removeAll()
+    }
+
+    func toggleFilter(_ level: LogLevel) {
+        if self.filter.contains(level) {
+            self.filter.remove(level)
+        } else {
+            self.filter.insert(level)
+        }
     }
 }
