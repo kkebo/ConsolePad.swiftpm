@@ -2,4 +2,16 @@
 "Input here..." = "Input here...";
 "Clear All" = "Clear All";
 "Send" = "Send";
-"All" = "All";
+"Logs" = "Logs";
+"Info" = "Info";
+"Warnings" = "Warnings";
+"Errors" = "Errors";
+"Logs Only" = "Logs Only";
+"Info Only" = "Info Only";
+"Warnings Only" = "Warnings Only";
+"Errors Only" = "Errors Only";
+"All Levels" = "All Levels";
+"Custom Levels" = "Custom Levels";
+"Filters" = "Filters";
+"Log Levels" = "Log Levels";
+"Done" = "Done";

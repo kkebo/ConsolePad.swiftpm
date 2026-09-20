@@ -2,4 +2,16 @@
 "Input here..." = "ここに入力...";
 "Clear All" = "全て消去";
 "Send" = "送信";
-"All" = "全て";
+"Logs" = "ログ";
+"Info" = "情報";
+"Warnings" = "警告";
+"Errors" = "エラー";
+"Logs Only" = "ログのみ";
+"Info Only" = "情報のみ";
+"Warnings Only" = "警告のみ";
+"Errors Only" = "エラーのみ";
+"All Levels" = "すべてのレベル";
+"Custom Levels" = "カスタムレベル";
+"Filters" = "フィルタ";
+"Log Levels" = "ログレベル";
+"Done" = "完了";
