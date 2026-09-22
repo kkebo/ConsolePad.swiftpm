@@ -8,7 +8,7 @@ struct CommandLine {
 
     init(
         historyManager: HistoryManager,
-        onSend: @escaping (String) -> Void
+        onSend: @escaping (String) -> Void,
     ) {
         self.historyManager = historyManager
         self.onSend = onSend
@@ -31,7 +31,7 @@ extension CommandLine: View {
             if !self.isMultiline {
                 TextField(
                     "Input here...",
-                    text: self.historyManager.binding
+                    text: self.historyManager.binding,
                 )
                 .autocorrectionDisabled()
                 .textInputAutocapitalization(.never)

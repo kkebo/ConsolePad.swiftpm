@@ -32,9 +32,9 @@ let package = Package(
                 .enableUpcomingFeature("MemberImportVisibility"),
                 .enableUpcomingFeature("InferIsolatedConformances"),
                 .enableUpcomingFeature("NonisolatedNonsendingByDefault"),
-            ]
+            ],
         )
-    ]
+    ],
 )
 
 #if canImport(AppleProductTypes)
@@ -61,7 +61,7 @@ let package = Package(
                 .portraitUpsideDown(.when(deviceFamilies: [.pad])),
             ],
             appCategory: .developerTools,
-            additionalInfoPlistContentFilePath: "Info.plist"
+            additionalInfoPlistContentFilePath: "Info.plist",
         )
     ]
 #endif

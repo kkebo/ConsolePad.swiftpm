@@ -58,7 +58,7 @@ final class ConsoleViewModel {
         }
         console.setObject(
             self.clear as @convention(block) () -> Void,
-            forKeyedSubscript: "clear"
+            forKeyedSubscript: "clear",
         )
     }
 

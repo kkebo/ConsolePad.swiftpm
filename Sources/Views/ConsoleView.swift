@@ -17,7 +17,7 @@ extension ConsoleView: View {
         .safeAreaInset(edge: .bottom) {
             CommandLine(
                 historyManager: self.viewModel.historyManager,
-                onSend: self.viewModel.run
+                onSend: self.viewModel.run,
             )
             .padding()
             .background(.regularMaterial)
@@ -45,7 +45,7 @@ extension ConsoleView: View {
                 self.filterView
                     .frame(
                         minWidth: self.hSizeClass == .regular ? 360 : nil,
-                        minHeight: self.hSizeClass == .regular ? 400 : nil
+                        minHeight: self.hSizeClass == .regular ? 400 : nil,
                     )
             }
         }
