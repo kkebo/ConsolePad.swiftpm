@@ -12,7 +12,7 @@ final class HistoryManager {
     var binding: Binding<String> {
         .init(
             get: { self.buffer[self.index] },
-            set: { self.buffer[self.index] = $0 }
+            set: { self.buffer[self.index] = $0 },
         )
     }
 
